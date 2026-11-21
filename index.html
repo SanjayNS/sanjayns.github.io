@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanjay NS | Product Security Engineer · Application &amp; IoT Security</title>
+<meta name="description" content="Sanjay NS is a Product Security Engineer at Honeywell and Chapter Lead at Null Bangalore, working on application, hardware, IoT and automotive security.">
+<meta name="theme-color" content="#0a0f16">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Sanjay NS | Product Security Engineer">
+<meta property="og:description" content="Application, hardware, IoT and automotive security. Product Security Engineer at Honeywell, Chapter Lead at Null Bangalore.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f16'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='monospace' font-size='26' font-weight='700' fill='%232dd4bf'%3ESN%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0f16;--surface:#101822;--surface-2:#131d29;--line:#1f2b3a;
+  --text:#e7edf4;--muted:#9aabbd;--accent:#2dd4bf;--accent-ink:#04211d;
+  --blue:#60a5fa;--amber:#fbbf24;--radius:16px;--maxw:1120px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,blockquote,dl,dd,figure{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.container{width:min(100% - 2.5rem,var(--maxw));margin-left:auto;margin-right:auto}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.skip{position:absolute;left:-999px;top:0;z-index:100;padding:.6rem 1rem;background:var(--accent);color:var(--accent-ink);font-weight:700;border-radius:0 0 10px 0}
+.skip:focus{left:0}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(10,15,22,.78);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid rgba(31,43,58,.8)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:650}
+.monogram{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;font:700 .82rem var(--mono);color:var(--accent);background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.35)}
+.nav{display:flex;align-items:center;gap:.15rem}
+.nav a{padding:.45rem .7rem;border-radius:999px;text-decoration:none;color:var(--muted);font-size:.9rem;transition:color .2s,background .2s}
+.nav a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav a.active{color:var(--accent)}
+.nav a.nav-cta{margin-left:.5rem;padding:.45rem .95rem;color:var(--accent-ink);background:var(--accent);font-weight:700}
+.nav a.nav-cta:hover{background:#5eead4;color:var(--accent-ink)}
+.nav-toggle{display:none;width:42px;height:42px;padding:0;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.nav-toggle span{display:block;width:18px;height:2px;border-radius:2px;background:var(--text);transition:transform .2s,opacity .2s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* buttons, chips, tags */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:46px;padding:.75rem 1.2rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);color:var(--text);font:600 .95rem var(--sans);text-decoration:none;transition:transform .15s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-1px);border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.07)}
+.btn-primary{background:var(--accent);border-color:transparent;color:var(--accent-ink);box-shadow:0 10px 30px -12px rgba(45,212,191,.7)}
+.btn-primary:hover{background:#5eead4;border-color:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{display:inline-flex;align-items:center;padding:.28rem .72rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);color:var(--muted);font-size:.84rem;line-height:1.4}
+.chip.accent{color:var(--accent);border-color:rgba(45,212,191,.35);background:rgba(45,212,191,.07)}
+.tag{display:inline-block;padding:.1rem .5rem;border-radius:6px;font:600 .7rem/1.6 var(--mono);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.tag.award{color:var(--amber);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3)}
+.tag.talk{color:var(--blue);background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3)}
+.tag.role{color:var(--accent);background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(1.5rem,4vw,3rem)}
+.hero::before{content:"";position:absolute;left:-10%;right:-10%;top:-10%;height:560px;pointer-events:none;background:radial-gradient(600px 300px at 20% 35%,rgba(45,212,191,.16),transparent 70%),radial-gradient(520px 300px at 85% 10%,rgba(96,165,250,.14),transparent 70%)}
+.hero::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000,transparent 70%)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font:500 .85rem var(--mono);color:var(--accent)}
+.hero h1{margin:.6rem 0 .45rem;padding-bottom:.1em;font-size:clamp(2.8rem,9vw,4.8rem);font-weight:750;line-height:1.1;letter-spacing:-.025em;color:#fff;background:linear-gradient(95deg,#fff 30%,#8ff0e1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.roles{font-size:clamp(1.05rem,2.6vw,1.35rem);font-weight:550;line-height:1.5}
+.roles span{color:var(--muted);font-weight:450}
+.tagline{margin-top:1rem;color:var(--muted);max-width:52ch}
+.cert-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:1.1rem}
+.cert-row b{font:500 .8rem var(--mono);color:var(--muted);margin-right:.2rem}
+.actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.8rem}
+.hint{margin-top:.9rem;color:var(--muted);font-size:.86rem}
+.rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.07s}.d2{animation-delay:.14s}.d3{animation-delay:.21s}.d4{animation-delay:.28s}.d5{animation-delay:.35s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}}
+
+/* terminal */
+.terminal{border:1px solid var(--line);border-radius:14px;background:#0b1118;box-shadow:0 30px 60px -30px rgba(0,0,0,.85);overflow:hidden;font:400 .86rem/1.75 var(--mono)}
+.term-bar{display:flex;align-items:center;gap:.45rem;padding:.65rem .9rem;border-bottom:1px solid var(--line);background:#0e1620}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#2a3748}
+.term-bar span{flex:1;padding-right:44px;text-align:center;color:var(--muted);font-size:.74rem}
+.term-body{padding:1rem 1.1rem 1.2rem;overflow-x:auto}
+.ln{display:block;white-space:pre;color:var(--text)}
+.ln.o{color:var(--muted)}
+.ln .p{color:var(--accent)}
+.cursor{display:inline-block;width:.55em;height:1.05em;background:var(--accent);vertical-align:-.18em;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+
+/* sections */
+section{padding:clamp(3rem,7vw,5.5rem) 0}
+.alt{background:linear-gradient(180deg,transparent,rgba(16,24,34,.7) 20%,rgba(16,24,34,.7) 80%,transparent)}
+.section-head{margin-bottom:2rem}
+.kicker{font:500 .8rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h2{margin-top:.35rem;font-size:clamp(1.75rem,4vw,2.4rem);line-height:1.15;letter-spacing:-.015em}
+.js .reveal{opacity:0;translate:0 18px;transition:opacity .6s ease,translate .6s ease}
+.js .reveal.in{opacity:1;translate:0 0}
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{display:flex;flex-direction:column;padding:1.35rem 1.4rem;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--surface),var(--surface-2));transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(45,212,191,.4)}
+.card h3{margin-bottom:.45rem;font-size:1.08rem;line-height:1.35}
+.card p{color:var(--muted);font-size:.95rem}
+.card .chips{margin-top:auto;padding-top:1rem}
+.mono-label{display:block;margin-bottom:.5rem;font:500 .78rem var(--mono);color:var(--accent)}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.prose{color:var(--muted);font-size:1.05rem}
+.quote{margin-top:1.6rem;padding:1.1rem 1.3rem;border-left:3px solid var(--accent);border-radius:0 12px 12px 0;background:rgba(45,212,191,.06)}
+.quote p{font-size:1.02rem;font-style:italic}
+.quote footer{margin-top:.5rem;font:500 .78rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.stat{padding:1.1rem;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.stat strong{display:block;font:700 1.85rem/1.1 var(--mono);color:var(--accent)}
+.stat span{display:block;margin-top:.4rem;color:var(--muted);font-size:.86rem;line-height:1.45}
+
+/* timeline */
+.timeline{margin-left:.4rem;padding-left:1.6rem;border-left:2px solid var(--line)}
+.timeline>li{position:relative;padding-bottom:2.3rem}
+.timeline>li:last-child{padding-bottom:0}
+.timeline>li::before{content:"";position:absolute;left:calc(-1.6rem - 7px);top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 0 4px rgba(45,212,191,.12)}
+.meta{display:flex;flex-wrap:wrap;gap:.2rem .9rem;margin-bottom:.3rem;font:500 .8rem var(--mono);color:var(--accent)}
+.meta span{color:var(--muted)}
+.timeline h3{font-size:1.2rem;line-height:1.35}
+.org{margin:.1rem 0 .7rem;font-weight:550;color:var(--text)}
+.bullets li{position:relative;padding-left:1.1rem;color:var(--muted)}
+.bullets li+li{margin-top:.55rem}
+.bullets li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:2px;background:var(--accent);opacity:.85}
+.timeline.compact>li{padding-bottom:1.1rem}
+.timeline.compact p{color:var(--muted)}
+
+/* skills */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:start}
+.stack{display:grid;gap:1rem}
+.tools{display:grid;grid-template-columns:auto 1fr;gap:1rem 1.25rem;padding:1.4rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.tools dt{padding-top:.3rem;font:600 .76rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.tools dd{display:flex;flex-wrap:wrap;gap:.4rem}
+
+/* achievements, credentials */
+.ach li{padding:1.1rem 1.25rem;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.ach-top{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;margin-bottom:.45rem}
+.ach time{font:500 .8rem var(--mono);color:var(--muted)}
+.ach p{color:var(--muted);font-size:.95rem}
+.ach p b{color:var(--text);font-weight:600}
+.cert small{display:block;margin-bottom:.45rem;font:500 .76rem var(--mono);color:var(--accent)}
+.cert h3{margin-bottom:.8rem;font-size:1rem}
+.cert a{display:inline-flex;align-items:center;gap:.35rem;align-self:flex-start;margin-top:auto;color:var(--blue);font-size:.86rem;font-weight:600;text-decoration:none}
+.cert a:hover{text-decoration:underline}
+.sub-head{margin:3rem 0 1.2rem;font-size:1.3rem}
+.edu small{display:block;margin-bottom:.45rem;font:500 .78rem var(--mono);color:var(--accent)}
+.edu strong{display:block;margin-top:.7rem;font:600 .9rem var(--mono);color:var(--text)}
+
+/* community */
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.org-list li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.org-list li:first-child{padding-top:0}
+.org-list b{font-weight:600}
+.org-list span{color:var(--muted);font-size:.9rem}
+.col-head{margin:0 0 1.1rem;font-size:1.2rem}
+.col-head.gap{margin-top:2.2rem}
+
+/* contact */
+.contact-card{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.5rem,4vw,2.6rem);border:1px solid rgba(45,212,191,.3);border-radius:22px;background:radial-gradient(520px 240px at 0% 0%,rgba(45,212,191,.13),transparent 70%),var(--surface)}
+.contact-card .lede{margin:.8rem 0 1.5rem;color:var(--muted);max-width:46ch}
+.contact-list{display:grid;gap:.7rem}
+.contact-list a,.contact-list .static{display:flex;align-items:center;gap:.9rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);text-decoration:none;overflow-wrap:anywhere}
+.contact-list a:hover{border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.05)}
+.contact-list .ico{width:1.3rem;height:1.3rem;color:var(--accent)}
+.contact-list small{display:block;font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.site-footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem}
+.site-footer a{text-decoration:none}
+.site-footer a:hover{color:var(--accent)}
+
+@media (max-width:960px){
+  .nav-toggle{display:inline-flex}
+  .nav{position:absolute;left:0;right:0;top:64px;display:none;flex-direction:column;align-items:stretch;gap:.15rem;padding:.7rem 1.25rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .nav a{padding:.75rem .9rem;font-size:1rem}
+  .nav a.nav-cta{margin:.5rem 0 0;text-align:center}
+  .hero-grid,.about-grid,.skills-grid,.community-grid,.contact-card{grid-template-columns:1fr}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .g2,.g3{grid-template-columns:1fr}
+  .actions .btn{flex:1 1 0}
+  .actions .btn-primary{flex-basis:100%}
+  .tools{grid-template-columns:1fr;gap:.4rem}
+  .tools dd{margin-bottom:.7rem}
+}
+@media (max-width:480px){
+  .terminal{font-size:.72rem}
+  .container{width:min(100% - 2rem,var(--maxw))}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="#top" aria-label="Sanjay NS, back to top"><span class="monogram">SN</span><span>Sanjay NS</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#community">Community</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="contact.vcf">Save contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow rise"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>Mysore, Karnataka, India</p>
+      <h1 id="hero-title" class="rise d1">Sanjay NS</h1>
+      <p class="roles rise d2">Product Security Engineer <span>@ Honeywell</span><br>Chapter Lead <span>@ Null Bangalore</span></p>
+      <p class="tagline rise d3">Application and IoT Security Fanatic. Abstract Photographer.</p>
+      <div class="cert-row rise d3"><b>Certified</b><span class="chip accent">eWPT</span><span class="chip accent">CCNA</span><span class="chip accent">AWS</span><span class="chip accent">Azure</span><span class="chip accent">OCI</span></div>
+      <div class="actions rise d4">
+        <a class="btn btn-primary" href="contact.vcf"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg>Save Contact</a>
+        <a class="btn" href="mailto:sanjayns1998.2@gmail.com"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/sanjay-ns/" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-linkedin"></use></svg>LinkedIn</a>
+        <a class="btn" href="tel:+918553362552"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>Call</a>
+      </div>
+      <p class="hint rise d5">Tap <b>Save Contact</b> to add my name, phone, email and LinkedIn to your phone.</p>
+    </div>
+    <div class="terminal rise d3" aria-hidden="true">
+      <div class="term-bar"><i></i><i></i><i></i><span>sanjay@ns: ~</span></div>
+      <div class="term-body">
+        <span class="ln"><span class="p">$</span> whoami</span>
+        <span class="ln o">product-security-engineer</span>
+        <span class="ln"><span class="p">$</span> cat focus.txt</span>
+        <span class="ln o">web · hardware · iot · automotive · ot</span>
+        <span class="ln"><span class="p">$</span> candump can0</span>
+        <span class="ln o">  can0  7DF   [8]  02 01 0C 00 00 00 00 00</span>
+        <span class="ln o">  can0  7E8   [8]  04 41 0C 1A F8 00 00 00</span>
+        <span class="ln"><span class="p">$</span> <span class="cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="alt">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// about</p><h2>Profile</h2></header>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="prose">Experienced Cyber Security professional with 6 years of industry expertise in application, hardware and network penetration testing, coupled with 1 year of dedicated focus on vulnerability management and 2 years in IoT/Automotive Security Research and Development. Adept at conducting comprehensive security assessments and identifying vulnerabilities across diverse environments. Passionate about hardware security and automotive security, with a commitment to continuous learning and adaptability in dynamic work environments.</p>
+        <blockquote class="quote">
+          <p>To utilize my extensive ethical hacking, penetration testing, and vulnerability assessment capabilities to assist in keeping the organization’s name out of the evening news.</p>
+          <footer>Career objective</footer>
+        </blockquote>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><strong>6 yrs</strong><span>Application, hardware and network pentesting</span></div>
+        <div class="stat"><strong>2 yrs</strong><span>IoT and automotive security R&amp;D</span></div>
+        <div class="stat"><strong>2×</strong><span>Hardware CTF winner</span></div>
+        <div class="stat"><strong>1,500+</strong><span>Hours of manual effort saved per year with automation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// experience</p><h2>Where I’ve worked</h2></header>
+    <ol class="timeline">
+      <li class="reveal">
+        <div class="meta"><time>Aug 2024 – Present</time><span>Bangalore</span></div>
+        <h3>Product Security Engineer Level 2</h3>
+        <p class="org">Honeywell Technology Solutions</p>
+        <ul class="bullets">
+          <li>Lead comprehensive security assessments and penetration testing for Experion and its critical industrial protocols, including Modbus RTU, Modbus TCP, OPC UA and DLMS.</li>
+          <li>Identify and remediate hardware, web and thick-client vulnerabilities through deep-dive analysis of IoT and hardware protocols such as UART, SPI, I2C, JTAG and MQTT.</li>
+          <li>Drive hands-on security research and vulnerability discovery across complex cyber-physical environments, continuously enhancing the security posture of next-generation hardware and software ecosystems.</li>
+        </ul>
+      </li>
+      <li class="reveal">
+        <div class="meta"><time>Nov 2021 – Jul 2023</time><span>India</span></div>
+        <h3>Senior Security Consultant</h3>
+        <p class="org">EY GDS</p>
+        <ul class="bullets">
+          <li>Conducted penetration tests on web applications, IoT devices and client infrastructure using Burp Suite, Nmap, SQLmap and Kali Linux tools, with firmware analysis, protocol pentesting (UART, SPI and JTAG) and wireless communications.</li>
+          <li>Researched automotive communication technologies as a member of the Nebula R&amp;D group: CAN using MCP2515, Automotive Ethernet, ISO/SAE 21434, UDS, OBD, firmware analysis, AUTOSAR and V2X.</li>
+          <li>Developed Python and Bash scripts to automate vulnerability reports, saving more than 1,500 hours of manual effort per year.</li>
+        </ul>
+      </li>
+      <li class="reveal">
+        <div class="meta"><time>Oct 2020 – Oct 2021</time><span>India</span></div>
+        <h3>Security Analyst</h3>
+        <p class="org">EY GDS</p>
+        <ul class="bullets">
+          <li>Vulnerability lifecycle management, asset scanning and reporting using Qualys and Tenable for leading clients such as Bytedance.</li>
+        </ul>
+      </li>
+      <li class="reveal">
+        <div class="meta"><time>Jan 2020 – Apr 2020</time><span>Bangalore</span></div>
+        <h3>Automation and IoT Intern</h3>
+        <p class="org">CADEM Technologies</p>
+        <ul class="bullets">
+          <li>Managed an automation project that collected machine-condition data with sensors on a Raspberry Pi and uploaded it to a private cloud for analysis and predictive insights.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="projects" class="alt">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// projects</p><h2>Things I’ve built</h2></header>
+    <div class="grid g3 reveal">
+      <article class="card">
+        <span class="mono-label">2025</span>
+        <h3>MQTT Auditor</h3>
+        <p>An MQTT auditing and penetration-testing tool that evaluates broker security posture, identifies critical misconfigurations and validates resilience through automated fuzzing. A rule-based recommendation engine cross-references live broker setups with industry best practices and returns actionable hardening steps.</p>
+        <ul class="chips"><li class="chip">MQTT</li><li class="chip">IoT</li><li class="chip">Fuzzing</li></ul>
+      </article>
+      <article class="card">
+        <span class="mono-label">2024</span>
+        <h3>CAN Pentester using Raspberry Pi</h3>
+        <p>A Raspberry Pi-based device loaded with CAN-utils for comprehensive CAN testing. It sends CAN traffic through an MCP2515 or USB-CAN-A, with an OBD-to-USB converter for analysis and pentesting.</p>
+        <ul class="chips"><li class="chip">CAN</li><li class="chip">Raspberry Pi</li><li class="chip">OBD</li></ul>
+      </article>
+      <article class="card">
+        <span class="mono-label">2023</span>
+        <h3>CAN Traffic Monitor and Injection Alerting System</h3>
+        <p>Demonstrates CAN injection with an MCP2515, Arduino and Raspberry Pi: the Arduino injects malicious CAN frames while a Raspberry Pi node monitors traffic in real time, detects anomalies and alerts the user.</p>
+        <ul class="chips"><li class="chip">CAN injection</li><li class="chip">Arduino</li><li class="chip">Anomaly detection</li></ul>
+      </article>
+      <article class="card">
+        <span class="mono-label">2022 · EY GDS</span>
+        <h3>Automation using Python and Bash</h3>
+        <p>Scripts and Python libraries that automate vulnerability reporting, saving more than 1,500 hours of manual effort per year.</p>
+        <ul class="chips"><li class="chip">Python</li><li class="chip">Bash</li></ul>
+      </article>
+      <article class="card">
+        <span class="mono-label">2021 · EY GDS</span>
+        <h3>Automation using Python and Bash</h3>
+        <p>A major automation project that extracted data from PDF files, then cleaned, structured and stored it in Excel format.</p>
+        <ul class="chips"><li class="chip">Python</li><li class="chip">Bash</li></ul>
+      </article>
+      <article class="card">
+        <span class="mono-label">2020</span>
+        <h3>Crypto price alerts using Python</h3>
+        <p>A Python script that uses a cryptocurrency API to fetch real-time data and sends SMS alerts through Twilio APIs, signalling the best moments to buy or sell.</p>
+        <ul class="chips"><li class="chip">Python</li><li class="chip">Twilio API</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// skills</p><h2>Focus areas and toolkit</h2></header>
+    <div class="skills-grid reveal">
+      <div class="stack">
+        <div class="card">
+          <h3>Security testing</h3>
+          <ul class="chips"><li class="chip">Web application VAPT</li><li class="chip">Network pentesting</li><li class="chip">Hardware security</li><li class="chip">Thick-client testing</li><li class="chip">Firmware analysis</li><li class="chip">Wireless</li></ul>
+        </div>
+        <div class="card">
+          <h3>IoT and hardware protocols</h3>
+          <ul class="chips"><li class="chip">UART</li><li class="chip">SPI</li><li class="chip">I2C</li><li class="chip">JTAG</li><li class="chip">MQTT</li></ul>
+        </div>
+        <div class="card">
+          <h3>Automotive</h3>
+          <ul class="chips"><li class="chip">CAN</li><li class="chip">UDS</li><li class="chip">OBD</li><li class="chip">AUTOSAR</li><li class="chip">V2X</li><li class="chip">ISO/SAE 21434</li><li class="chip">Automotive Ethernet</li></ul>
+        </div>
+        <div class="card">
+          <h3>Industrial and OT</h3>
+          <ul class="chips"><li class="chip">Modbus RTU</li><li class="chip">Modbus TCP</li><li class="chip">OPC UA</li><li class="chip">DLMS</li></ul>
+        </div>
+      </div>
+      <dl class="tools">
+        <dt>Languages</dt><dd><span class="chip">Python</span><span class="chip">Bash</span></dd>
+        <dt>Database</dt><dd><span class="chip">SQL</span></dd>
+        <dt>Hardware</dt><dd><span class="chip">MCP2515</span><span class="chip">USB-CAN-A</span><span class="chip">Arduino</span><span class="chip">NodeMCU</span><span class="chip">Raspberry Pi</span><span class="chip">Attify Badge</span><span class="chip">HackRF</span><span class="chip">Jtagulator</span></dd>
+        <dt>Software</dt><dd><span class="chip">Burp Suite</span><span class="chip">Nmap</span><span class="chip">Sqlmap</span><span class="chip">Wireshark</span><span class="chip">CAN-utils</span><span class="chip">Kali Linux tools</span><span class="chip">Qualys</span><span class="chip">Tenable</span></dd>
+        <dt>Platforms</dt><dd><span class="chip">GNU/Linux</span><span class="chip">Windows</span><span class="chip">Raspbian</span></dd>
+        <dt>Management</dt><dd><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">GitLab</span><span class="chip">LaTeX</span><span class="chip">Microsoft Office</span></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="achievements" class="alt">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// achievements</p><h2>Recognition and talks</h2></header>
+    <ul class="grid g2 ach reveal">
+      <li><div class="ach-top"><time>Dec 2025</time><span class="tag award">Winner</span></div><p>First place in the Hardware CTF conducted by Microsoft Security Research Center National Conference, Bangalore, India.</p></li>
+      <li><div class="ach-top"><time>Oct 2025</time><span class="tag talk">Speaker</span></div><p>Delivered a session on SSTV at HAMFEST 2025, Goa, India, representing AMSAT India.</p></li>
+      <li><div class="ach-top"><time>Nov 2024</time><span class="tag role">Core Team Member</span></div><p>Appointed Bangalore Chapter core team member for the Cysinfo community.</p></li>
+      <li><div class="ach-top"><time>Nov 2023</time><span class="tag role">Chapter Lead</span></div><p>Appointed Bangalore Chapter Lead for Null Bangalore.</p></li>
+      <li><div class="ach-top"><time>Oct 2023</time><span class="tag award">Winner</span></div><p>First place in the Hardware CTF conducted by SeaSides Hardware Hacking Village, Seasides International Conference, Goa, India.</p></li>
+      <li><div class="ach-top"><time>Aug 2023</time><span class="tag talk">Speaker</span></div><p>Delivered a session and workshop on Automotive Security and IoT Security (Weaponizing UART) at Null Bangalore.</p></li>
+      <li><div class="ach-top"><time>Mar 2023</time><span class="tag talk">Judge</span></div><p>Judge for the IoT National Level Hackathon organized by Symbiot at Vidhya Vardhaka College of Engineering, Mysore, India.</p></li>
+      <li><div class="ach-top"><time>Feb 2023</time><span class="tag talk">Speaker</span></div><p>Awareness and Intro to Cyber Security at PES College of Engineering, Mandya, India.</p></li>
+      <li><div class="ach-top"><time>Nov 2022</time><span class="tag award">Spot Awardee</span></div><p>Received three spot awards at EY GDS, India for significant contributions to project teams, including Points of View (POVs) on automotive and IoT security.</p></li>
+      <li><div class="ach-top"><time>Sep 2021</time><span class="tag award">Winner</span></div><p>First place in the Abstract Photography Competition conducted by EY GDS, India.</p></li>
+      <li><div class="ach-top"><time>Mar 2020</time><span class="tag award">Runner Up</span></div><p>Second place in the National Level Hackathon conducted by PES College of Engineering, Mandya, India.</p></li>
+      <li><div class="ach-top"><time>Apr 2019</time><span class="tag role">Director and Tech Lead</span></div><p>Director for Technical Activities for IEEE and Technical Lead for the GNU/Linux Users’ Group at PES College of Engineering, Mandya, India.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// credentials</p><h2>Certifications and courses</h2></header>
+    <div class="grid g3 reveal">
+      <article class="card cert"><small>Nov 2023 · eLearnSecurity</small><h3>eWPT Certified Web PenTester</h3><a href="https://certs.ine.com/e981c354-3bd6-4419-b637-10de36e87bbe" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>May 2023 · Zscaler</small><h3>Zero Trust Exchange</h3><a href="https://verify.skilljar.com/c/ywkhys64iupr" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>Feb 2023 · Udemy</small><h3>Automotive Cyber Security</h3><a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-4a814b1f-86a2-464c-896b-dea268ca3483.pdf" target="_blank" rel="noopener noreferrer">Certificate<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>Mar 2022 · AWS</small><h3>AWS Certified Security Specialist</h3><a href="https://www.credly.com/badges/7f79e74d-de82-46a9-b3b9-3cec2f24b62f/linked_in_profile" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>Mar 2022 · Microsoft</small><h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3><a href="https://learn.microsoft.com/api/credentials/share/en-us/SanjayNS-4365/405CE8288763F587?sharingId=21C27BF5AC38F374" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>May 2021 · Microsoft</small><h3>Microsoft Certified: Azure Data Fundamentals (DP-900)</h3><a href="https://learn.microsoft.com/api/credentials/share/en-us/SanjayNS-4365/405CE8288763F587?sharingId=21C27BF5AC38F374" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>Aug 2020 · Oracle</small><h3>Oracle Cloud Infrastructure Foundations 2020 Certified Associate</h3><a href="https://www.credly.com/badges/ac7220d0-a35f-4254-8198-7f0f84f04fbb/public_url" target="_blank" rel="noopener noreferrer">Verify<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ext"></use></svg></a></article>
+      <article class="card cert"><small>May 2020 · Qualys</small><h3>Vulnerability Management</h3></article>
+      <article class="card cert"><small>Jul 2018 · Cisco</small><h3>Cisco Certified Network Associate: Routing and Switching (CCNA)</h3></article>
+    </div>
+
+    <h3 class="sub-head reveal">Education</h3>
+    <div class="grid g3 reveal">
+      <article class="card edu"><small>2016 – 2020</small><h3>Bachelor of Engineering, Computer Science</h3><p>PES College of Engineering</p><strong>CGPA 9.1 / 10</strong></article>
+      <article class="card edu"><small>2014 – 2016</small><h3>Pre-University College (PCMC)</h3><p>Citizens’ PU College</p><strong>90%</strong></article>
+      <article class="card edu"><small>2013 – 2014</small><h3>SSLC</h3><p>Citizens’ English High School</p><strong>91%</strong></article>
+    </div>
+  </div>
+</section>
+
+<section id="community" class="alt">
+  <div class="container">
+    <header class="section-head reveal"><p class="kicker">// community</p><h2>Organisations and giving back</h2></header>
+    <div class="community-grid">
+      <div class="reveal">
+        <h3 class="col-head">Organisations</h3>
+        <ul class="org-list">
+          <li><b>Null Bangalore</b><span>Chapter Lead</span></li>
+          <li><b>Cysinfo</b><span>Core Team Member</span></li>
+          <li><b>IoTSRG.org</b><span>Researcher</span></li>
+          <li><b>AMSAT India</b><span>Member</span></li>
+          <li><b>OWASP</b><span>Member</span></li>
+          <li><b>ASRG</b><span>Member</span></li>
+          <li><b>IoTSF – IoT Security Foundation</b><span>Member</span></li>
+          <li><b>BSides</b><span>Member</span></li>
+        </ul>
+        <h3 class="col-head gap">Interests</h3>
+        <ul class="chips"><li class="chip accent">Human Hacking</li><li class="chip accent">Abstract Photography</li><li class="chip accent">Fitness and Wellbeing</li><li class="chip accent">Robotics</li><li class="chip accent">Meditation</li></ul>
+      </div>
+      <div class="reveal">
+        <h3 class="col-head">Co-curricular activities</h3>
+        <ol class="timeline compact">
+          <li><div class="meta"><time>2025</time></div><p>Core Team member, Cysinfo</p></li>
+          <li><div class="meta"><time>2024</time></div><p>Researcher, IoTSRG.ORG</p></li>
+          <li><div class="meta"><time>2023</time></div><p>Chapter Lead, Null Bangalore, India</p></li>
+          <li><div class="meta"><time>2022</time></div><p>Core Team member, The Hackers’ Meetup, Bangalore</p></li>
+          <li><div class="meta"><time>2021 – 2024</time></div><p>Active contributor to all CSR activities organised by EY GDS, India</p></li>
+          <li><div class="meta"><time>2019</time></div><p>Reached out to schools to encourage participation in hackathons and workshops</p></li>
+          <li><div class="meta"><time>2018 – 2020</time></div><p>Core Volunteer, Free Software Movement of Karnataka (FSMK)</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-card reveal">
+      <div>
+        <p class="kicker">// contact</p>
+        <h2>Let’s connect</h2>
+        <p class="lede">Save my contact card straight to your phone, or reach out directly. The card includes my name, phone, email and LinkedIn.</p>
+        <a class="btn btn-primary" href="contact.vcf"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg>Download vCard</a>
+      </div>
+      <ul class="contact-list">
+        <li><a href="mailto:sanjayns1998.2@gmail.com"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span><small>Email</small>sanjayns1998.2@gmail.com</span></a></li>
+        <li><a href="tel:+918553362552"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg><span><small>Phone</small>+91 8553362552</span></a></li>
+        <li><a href="https://www.linkedin.com/in/sanjay-ns/" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-linkedin"></use></svg><span><small>LinkedIn</small>linkedin.com/in/sanjay-ns</span></a></li>
+        <li><span class="static"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg><span><small>Location</small>Mysore, Karnataka, India</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container foot">
+    <span>© <span id="year">2026</span> Sanjay NS</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var doc = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+  toggle.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) { setMenu(false); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
+
+  var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('in'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    doc.classList.add('js');
+    var seen = false;
+    var io = new IntersectionObserver(function (entries) {
+      seen = true;
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    items.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { if (!seen) { showAll(); } }, 1500);
+  }
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) { return; }
+        links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    links.forEach(function (a) {
+      var s = document.getElementById(a.getAttribute('href').slice(1));
+      if (s) { spy.observe(s); }
+    });
+    var home = document.getElementById('home');
+    if (home) { spy.observe(home); }
+  }
+
+  var y = document.getElementById('year');
+  if (y) { y.textContent = new Date().getFullYear(); }
+})();
+</script>
+</body>
+</html>

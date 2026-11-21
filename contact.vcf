@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:NS;Sanjay;;;
+FN:Sanjay NS
+ORG:Honeywell
+TITLE:Product Security Engineer
+TEL;TYPE=CELL,VOICE:+918553362552
+EMAIL;TYPE=INTERNET:sanjayns1998.2@gmail.com
+item1.URL:https://www.linkedin.com/in/sanjay-ns/
+item1.X-ABLabel:LinkedIn
+ADR;TYPE=HOME:;;;Mysore;Karnataka;India
+NOTE:Application and IoT Security | Chapter Lead @ Null Bangalore
+REV:2026-11-21T08:42:54Z
+END:VCARD
